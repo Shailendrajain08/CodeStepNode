@@ -1,5 +1,8 @@
 const express = require('express');
 const dbConnect = require('./MongoDB');
+
+//Using this to objetify _id 
+const mongodb = require('mongodb')
 const app = express();
 
 //For taking data from postman
@@ -27,5 +30,13 @@ app.put('/', async (req, res) => {
     );
     res.send("result send")
 })
+
+//delete api method using express
+app.delete("/:id", async (req, res) => {
+    console.log(req.params.id)
+    const data = await dbConnect();
+    const result = await data.deleteOne({_id: new mongodb.ObjectId(req.params.id)});
+    res.send(result)
+});
 
 app.listen(3000)
