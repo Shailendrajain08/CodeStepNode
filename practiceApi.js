@@ -17,8 +17,10 @@ app.get('/', async (req, res) => {
 
 //post api method using express
 app.post('/', async (req, res) => {
+    
     let data = await dbConnect();
     let result = data.insertOne(req.body);
+
     res.send(result)
 }) 
 
